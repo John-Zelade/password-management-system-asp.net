@@ -1,0 +1,48 @@
+﻿@model DBA.Models.account
+@{
+    ViewData["Title"] = "Update Account Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@if (Model != null)
+{
+    <form class="row g-3" asp-controller="User" asp-action="UpdateUserAccount" method="post">
+        <input type="hidden" name="accountID" value="@Model.accountID">
+        <input type="hidden" name="usersID" id="usersID"value="@Model.usersID">
+        <div class="col-md-4">
+            <label for="inputEmail4" class="form-label">URL</label>
+            <input type="text" name="url" class="form-control" id="inputEmail4" value="@Model.url" required>
+        </div>
+        <div class="col-md-4">
+            <label for="inputPassword4" class="form-label">Account Email/Username</label>
+            <input type="text" name="account_email" class="form-control" id="inputPassword4" value="@Model.account_email" required>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom02" class="form-label">Password</label>
+            <div class="input-group">
+                <input type="text" name="password" class="form-control" id="passwordInput" value="@Model.password" required>
+                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                    <i class="fa-solid fa-eye-slash"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+}
+<script>
+    const passwordInput = document.getElementById('passwordInput');
+    const togglePasswordButton = document.getElementById('togglePassword');
+
+    togglePasswordButton.addEventListener('click', function () {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        if (type === 'password') {
+            togglePasswordButton.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+        } else {
+            togglePasswordButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
+        }
+    });
+</script>

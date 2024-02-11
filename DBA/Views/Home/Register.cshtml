@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="register-box">
+
+    <form asp-controller="Home" asp-action="Register" method="post">
+        <div class="register-user-box">
+            <input type="text" name="Username" required="">
+            <label>Username</label>
+        </div>
+        <div class="register-user-box">
+            <input type="text" name="Fullname" required="">
+            <label>Fullname</label>
+        </div>
+        <div class="register-user-box">
+            <input type="password" name="Password" required="">
+            <label>Password</label>
+        </div>
+        <div class="register-user-box">
+            <input type="email" name="Email" required="">
+            <label>Email</label>
+        </div>
+        <center>
+            <button type="submit">
+                Register
+                <span></span>
+            </button>
+        </center>
+    </form>
+</div>
+<div class="toast-container position-fixed top-0 end-0 p-3 mt-5 me-5">
+    <div class="toast-body">
+        @ViewBag.ConnectionStatus
+    </div>
+</div>

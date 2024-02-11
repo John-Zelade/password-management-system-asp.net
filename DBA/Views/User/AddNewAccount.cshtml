@@ -1,0 +1,47 @@
+﻿@model List<DBA.Models.Users>
+@{
+    ViewData["Title"] = "Add Accounts";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h1 class="mb-5">Insert Account Details</h1>
+<form class="row g-3 mb-5" asp-controller="User" asp-action="AddAccount" method="post">
+    <input type="hidden" name="usersID" id="usersID" value="" />
+    
+    <div class="col-md-4">
+    <label for="validationCustom01" class="form-label">URL</label>
+    <input type="text" name="url" class="form-control" id="validationCustom01" placeholder="https://www.samplewebsite.com" required>
+  </div>
+  <div class="col-md-4">
+    <label for="validationCustom02" class="form-label">Account Email/Username</label>
+    <input type="text" name="account_email" class="form-control" id="validationCustom02" placeholder="name@example.com" required>
+  </div>
+    <div class="col-md-4">
+        <label for="validationCustom02" class="form-label">Password</label>
+        <div class="input-group">
+            <input type="password" name="password" class="form-control" id="passwordInput" placeholder="password" required>
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                <i class="fa-solid fa-eye-slash"></i>
+            </button>
+        </div>
+    </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </div>
+</form>
+
+<script>
+    const passwordInput = document.getElementById('passwordInput');
+    const togglePasswordButton = document.getElementById('togglePassword');
+
+    togglePasswordButton.addEventListener('click', function () {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        if (type === 'password') {
+            togglePasswordButton.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+        } else {
+            togglePasswordButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
+        }
+    });
+</script>

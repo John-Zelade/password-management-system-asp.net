@@ -1,0 +1,38 @@
+﻿@model List<DBA.Models.Users>
+@{
+    ViewData["Title"] = "Employees";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Password</th>
+            <th scope="col">Fullname</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <th scope="row">@user.ID</th>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.Fullname</td>
+                    <td>
+                        <a href="@Url.Action("UpdateUser", new { userId = user.ID })" class="btn btn-primary">Edit</a>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            }   }
+    </tbody>
+</table>
+
+
+

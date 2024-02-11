@@ -1,0 +1,78 @@
+﻿@model List<DBA.Models.account>
+@{
+    ViewData["Title"] = "Accounts";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h1>Accounts and Password</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">URL</th>
+            <th scope="col">Account Email/Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var acc in Model)
+            {
+                <tr>
+                    <th scope="row">@acc.accountID</th>
+                    <td>@acc.url</td>
+                    <td>@acc.account_email</td>
+                    <td>
+                        <div class="account-password-container input-group">
+                            <input type="password" class="account-password-input" disabled value="@acc.password" aria-describedby="togglePasswordButton">
+                            <button class="account-password-btn btn btn-outline-secondary" type="button" id="togglePasswordButton" onclick="togglePassword(this)">
+                                <i class="fa-solid fa-eye-slash"></i>
+                            </button>
+                        </div>
+                        <script>
+                            function togglePassword(button) {
+                                const input = button.previousElementSibling;
+                                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                                input.setAttribute('type', type);
+
+                                if (type === 'password') {
+                                    button.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+                                } else {
+                                    button.innerHTML = '<i class="fa-solid fa-eye"></i>';
+                                }
+                            }
+                        </script>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("UpdateUser", new { accountId = acc.accountID })" class="btn btn-primary">Edit</a>
+                        <a id="deleteAccountButton" href="@Url.Action("deleteAccount", new { accountId = acc.accountID })" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
+
+                        <script>
+                            function confirmDelete() {
+                                if (confirm("Are you sure you want to delete this account?")) {
+                                    var userId = localStorage.getItem('UserId');
+
+                                    var deleteButton = document.getElementById('deleteAccountButton');
+
+                                    var deleteUrl = deleteButton.getAttribute('href') + '&userId=' + userId;
+                                    deleteButton.setAttribute('href', deleteUrl);
+                                    return true;
+                                } else {
+            
+                                    return false;
+                                }
+                            }
+                        </script>
+
+
+
+                    </td>
+                </tr>
+            }   }
+    </tbody>
+</table>
+
+

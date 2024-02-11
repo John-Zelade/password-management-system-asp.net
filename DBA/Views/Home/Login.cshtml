@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+<div class="login-box">
+
+    <form id="loginForm" asp-action="Login" asp-controller="Home" method="post">
+        <div class="user-box">
+            <input type="text" id="Username" name="Username" required="">
+            <label>Username</label>
+        </div>
+        <div class="user-box">
+            <input type="text" id="Password" name="Password" required="">
+            <label>Password</label>
+        </div><center>
+            <button type="submit">
+                Login
+                <span></span>
+            </button>
+        </center>
+    </form>
+</div>
+
+<div class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+        <div class="toast-body">
+            @ViewBag.ConnectionStatus
+        </div>
+</div>
